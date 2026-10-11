@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Digital School | E-commerce & Marketing</title>
+    
+    <!-- ========================================== -->
+    <!--                   CSS                      -->
+    <!-- ========================================== -->
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --bg-light: #F9FAFB;
+            --bg-white: #FFFFFF;
+            --text-main: #111827;
+            --text-muted: #6B7280;
+            --border-color: #E5E7EB;
+            --transition-speed: 0.3s;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        header {
+            background: var(--bg-white);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: box-shadow var(--transition-speed);
+        }
+        header.scrolled {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--bg-white);
+        }
+        .badge {
+            display: inline-block;
+            background: #EEF2FF;
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #111827;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background var(--transition-speed);
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { background: var(--primary-hover); }
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+        .btn-outline:hover { background: var(--bg-light); }
+        .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding: 40px 20px;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+        }
+        .stat-item h3 { font-size: 2rem; margin-bottom: 5px; }
+        .stat-item p { font-size: 1rem; opacity: 0.9; }
+        
+        .urgency-banner {
+            background: #FEF3C7;
+            color: #92400E;
+            text-align: center;
+            padding: 12px;
+            font-weight: 600;
+        }
+
+        /* Section Global */
+        section { padding: 80px 0; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .section-header p { color: var(--text-muted); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Courses Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .tag { font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; display: inline-block; background: #EEF2FF; padding: 4px 8px; border-radius: 4px; }
+        .card h3 { font-size: 1.25rem; margin-bottom: 15px; }
+        .card p { color: var(--text-muted); margin-bottom: 25px; font-size: 0.95rem; min-height: 60px;}
+        .price-row { display: flex; justify-content: space-between; align-items: center; }
+        .price { font-size: 1.5rem; font-weight: 700; }
+
+        /* Resources */
+        .resource-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background: var(--bg-white);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .resource-content h4 { margin-bottom: 5px; }
+        .resource-content a { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-top: 10px; display: inline-block; transition: color 0.2s; }
+        .resource-content a:hover { color: var(--primary-hover); text-decoration: underline; }
+
+        /* Testimonials */
+        .testimonials { background: var(--bg-white); }
+        .review-card { background: var(--bg-light); border: none; }
+        .stars { color: #FBBF24; margin-bottom: 15px; font-size: 1.2rem;}
+        .reviewer { display: flex; align-items: center; gap: 10px; margin-top: 20px; }
+        .reviewer-info h5 { font-size: 1rem; }
+        .reviewer-info p { font-size: 0.85rem; color: var(--text-muted); margin: 0; min-height: auto;}
+
+        /* About Me */
+        .about-section { background: var(--bg-light); }
+        .about-content { max-width: 800px; margin: 0 auto; background: var(--bg-white); padding: 40px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .about-content h2 { margin-bottom: 20px; }
+        .about-content p { margin-bottom: 15px; color: var(--text-muted); font-size: 1.1rem; }
+
+        /* Interactive FAQ (Accordion) */
+        .faq-item {
+            background: var(--bg-white);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: var(--bg-white);
+            transition: background 0.3s ease;
+        }
+        .faq-question:hover { background: #f3f4f6; }
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--text-muted);
+        }
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px 20px;
+            max-height: 200px; /* Arbitrary large number to allow animation */
+        }
+        .icon-plus::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+        .faq-item.active .icon-plus::after {
+            content: '−';
+            transform: rotate(180deg);
+        }
+
+        /* Footer CTA */
+        .footer-cta { text-align: center; background: #111827; color: white; padding: 80px 20px; }
+        .footer-cta h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        .footer-cta p { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.8; }
+        
+        footer { text-align: center; padding: 20px; background: var(--bg-white); border-top: 1px solid var(--border-color); font-size: 0.9rem; color: var(--text-muted); }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .section-header h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!--                   HTML                     -->
+    <!-- ========================================== -->
+    
+    <!-- Urgency Banner -->
+    <div class="urgency-banner">
+        ⏳ Limited Time: Naye batch mein sirf 32 seats baaki hain enroll aaj hi
+    </div>
+
+    <!-- Header -->
+    <header id="main-header">
+        <div class="container navbar">
+            <a href="#" class="logo">The Digital School</a>
+            <a href="#courses" class="btn">Explore</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="badge">🚀 2500+ students already growing with us</div>
+            <h1>Start Learning & Make Yourself an Expert</h1>
+            <p>E-commerce aur Digital Marketing ki practical skills seekho, real business build karo step-by-step courses ke saath, jo actually results dete hain.</p>
+            <div class="hero-buttons">
+                <a href="#courses" class="btn">Explore Courses</a>
+                <a href="#about" class="btn btn-outline">Know Prakash</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <div class="stats">
+        <div class="stat-item">
+            <h3 class="counter" data-target="2500">2500+</h3>
+            <p>Students Taught</p>
+        </div>
+        <div class="stat-item">
+            <h3 class="counter" data-target="100">100+</h3>
+            <p>Brands Worked With</p>
+        </div>
+        <div class="stat-item">
+            <h3>7 Years</h3>
+            <p>Experience</p>
+        </div>
+        <div class="stat-item">
+            <h3 class="counter" data-target="200000">2L+</h3>
+            <p>Community Members</p>
+        </div>
+    </div>
+
+    <!-- Courses Section -->
+    <section id="courses" class="container">
+        <div class="section-header">
+            <p>OUR NEW COURSES</p>
+            <h2>Find the right Course for your needs</h2>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <span class="tag">BEGINNER</span>
+                <h3>Start Your Ecommerce Business</h3>
+                <p>Zero se apna online store setup karo product research, supplier, store setup aur first sale tak ka pura roadmap.</p>
+                <div class="price-row">
+                    <span class="price">₹699</span>
+                    <button class="btn" onclick="alert('Proceeding to Checkout for ₹699')">Enroll</button>
+                </div>
+            </div>
+            <div class="card">
+                <span class="tag">ADS</span>
+                <h3>Facebook & Instagram Ads Mastery</h3>
+                <p>Meta Ads se targeted traffic aur sales kaise laayein targeting, creatives, aur budget optimization sikhein.</p>
+                <div class="price-row">
+                    <span class="price">₹599</span>
+                    <button class="btn" onclick="alert('Proceeding to Checkout for ₹599')">Enroll</button>
+                </div>
+            </div>
+            <div class="card">
+                <span class="tag">BUSINESS</span>
+                <h3>The Reselling Mastery Program</h3>
+                <p>Bina inventory ke reselling business shuru karo sourcing, pricing aur marketplaces ki poori strategy.</p>
+                <div class="price-row">
+                    <span class="price">₹499</span>
+                    <button class="btn" onclick="alert('Proceeding to Checkout for ₹499')">Enroll</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Products / Free Resources -->
+    <section id="resources" class="container" style="padding-top: 20px;">
+        <div class="section-header">
+            <p>DIGITAL PRODUCTS</p>
+            <h2>Free Resources & Templates</h2>
+        </div>
+        <div class="grid">
+            <div class="resource-card">
+                <div style="font-size: 2rem;">📊</div>
+                <div class="resource-content">
+                    <h4>Product Research Sheet</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin:0;">Winning products dhundhne ke liye ready-made tracker.</p>
+                    <a href="#download" onclick="alert('Downloading Product Research Sheet...')">Download Free &rarr;</a>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div style="font-size: 2rem;">📝</div>
+                <div class="resource-content">
+                    <h4>Ad Copy Templates</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin:0;">High-converting Facebook & Insta ad copy templates.</p>
+                    <a href="#download" onclick="alert('Downloading Ad Copy Templates...')">Download Free &rarr;</a>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div style="font-size: 2rem;">✅</div>
+                <div class="resource-content">
+                    <h4>Store Launch Checklist</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin:0;">Apna store launch karne se pehle ki complete checklist.</p>
+                    <a href="#download" onclick="alert('Downloading Store Launch Checklist...')">Download Free &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <p>TESTIMONIALS</p>
+                <h2>Students ka kehna hai kya?</h2>
+                <div class="stars">★★★★★ <span style="color:#111; font-weight:bold; font-size: 1rem;">4.9/5 Average Rating</span></div>
+            </div>
+            <div class="grid">
+                <div class="card review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Prakash sir ke course se maine apna pehla online store launch kiya aur 2 mahine mein profit start ho gaya."</p>
+                    <div class="reviewer">
+                        <div class="reviewer-info">
+                            <h5>Ankit Sharma</h5>
+                            <p>E-commerce Store Owner</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Ads course bahut practical tha, ROAS samajhne mein bahut help mili. Highly recommend!"</p>
+                    <div class="reviewer">
+                        <div class="reviewer-info">
+                            <h5>Riya Verma</h5>
+                            <p>Digital Marketer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Reselling course ne mujhe bina investment ke business start karne ka tarika sikhaya."</p>
+                    <div class="reviewer">
+                        <div class="reviewer-info">
+                            <h5>Mohit Yadav</h5>
+                            <p>Reseller</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <p style="text-transform: uppercase; font-weight: 600; color: var(--primary); font-size: 0.9rem; margin-bottom: 10px;">About Me</p>
+                <h2>Hey, I'm Prakash 👋</h2>
+                <p>I'm a Digital Marketer & E-commerce Expert with 7+ years of experience helping businesses and individuals grow online.</p>
+                <p>Over the years, I've worked with 100+ brands and trained 5,000+ students through YouTube, Seekho App, and my premium courses. My mission is simple: to make digital marketing and online business easy, practical, and profitable for everyone.</p>
+                <p>Whether you're looking to build a successful career, start an online business, or scale your existing brand, I'm here to guide you with proven strategies and real-world experience.</p>
+                <p>If you're ready to transform your skills and create new opportunities, let's connect. I'll provide you with the knowledge, mentorship, and support you need to achieve your goals.</p>
+                <p><strong>Learn. Grow. Earn. Let's build your success together! 🚀</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section with JavaScript Accordion -->
+    <section id="faq" class="container">
+        <div class="section-header">
+            <h2>Aapke sawaalon ke jawab (FAQs)</h2>
+        </div>
+        <div style="max-width: 800px; margin: 0 auto;">
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Kya course beginners ke liye hai?</span>
+                    <span class="icon-plus"></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Haan, sabhi courses zero se shuru hote hain, koi prior experience nahi chahiye. Everything is taught step-by-step from scratch.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Lifetime access milega?</span>
+                    <span class="icon-plus"></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Haan, ek baar enroll karne ke baad aapko course materials aur future updates ka lifetime access milta hai.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Certificate milega kya?</span>
+                    <span class="icon-plus"></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Bilkul! Course completion ke baad aapko official digital certificate provide kiya jayega jo aap apne resume/LinkedIn par add kar sakte hain.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Support kaise milega?</span>
+                    <span class="icon-plus"></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Aapko dedicated community group access aur email support milega taaki aapke saare doubts clear ho sakein.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <div class="footer-cta">
+        <div class="container">
+            <h2>Ready to become an expert?</h2>
+            <p>Aaj hi apna course choose karo aur apni e-commerce journey shuru karo.</p>
+            <a href="#courses" class="btn" style="background: white; color: black;">Enroll in a Course</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 thedigitalschool.io | All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!--               JAVASCRIPT (JS)              -->
+    <!-- ========================================== -->
+    <script>
+        // 1. FAQ Accordion Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const parentItem = question.parentElement;
+                    
+                    // Close other open FAQs
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        if (item !== parentItem) {
+                            item.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle current FAQ
+                    parentItem.classList.toggle('active');
+                });
+            });
+        });
+
+        // 2. Sticky Navbar Shadow on Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 3. Smooth Scrolling for internal anchor links (already supported by CSS scroll-behavior, 
+        //    but this ensures fallback for older browsers and closes mobile menus if we had one).
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Only prevent default if it's not a dummy download link
+                if(this.getAttribute('href') !== '#download') {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
